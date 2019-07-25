@@ -48,12 +48,13 @@ def parse(page):
 
 
     try:
-        result = soup.find("div", {"id": "div37419"})
+        result = soup.find("div", {"id": "divResult"})
+        result = result.find('tbody')
         result = result.find('tbody')
         result = result.find_all('tr')
         for element in result[0].find_all('th'):
             result_heading.append(element.contents[0].strip())
-        for element in result[1:]:
+        for element in result[1:-1]:
             t = []
             for d in element.find_all('td')[:2]:
                 t.append(d.contents[0].strip())

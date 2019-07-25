@@ -16,9 +16,9 @@ browser.get(list_of_images[1])
 browser.save_screenshot('captha.png')
 browser.back()
 username = browser.find_element_by_id('txt_username')
-username.send_keys('BE/10080/17')
+username.send_keys('')
 password = browser.find_element_by_id('txt_password')
-password.send_keys('Gudda@1999')
+password.send_keys('')
 captha_txt = (pt.image_to_string(Image.open('captha.png'), lang='eng'))
 print(captha_txt)
 captha = browser.find_element_by_id('txtcaptcha')
@@ -33,20 +33,20 @@ page = browser.page_source
 
 soup = BeautifulSoup(page, 'html.parser')
 attendance = soup.find("div", {"id": "divAttendance"})
-table_head = attendance.find('thead')
-table_head = table_head.find_all('th')
-attendance_heading = []
-for element in table_head:
-    attendance_heading.append((element.contents[0]).strip())
-attandance_body = attendance.find('tbody')
-attandance_body = attandance_body.find_all('tr')
-attendance_body_content = []
-for entry in attandance_body:
-    temp = entry.find_all('td')
-    t = []
-    for d in temp:
-        t.append(d.contents[0].strip())
-    attendance_body_content.append(t)
+# table_head = attendance.find('thead')
+# table_head = table_head.find_all('th')
+# attendance_heading = []
+# for element in table_head:
+#     attendance_heading.append((element.contents[0]).strip())
+# attandance_body = attendance.find('tbody')
+# attandance_body = attandance_body.find_all('tr')
+# attendance_body_content = []
+# for entry in attandance_body:
+#     temp = entry.find_all('td')
+#     t = []
+#     for d in temp:
+#         t.append(d.contents[0].strip())
+#     attendance_body_content.append(t)
 
 examination = soup.find("div", {"id": "divTestMark"})
 examination = examination.find_all('tbody')
@@ -64,7 +64,10 @@ for element in examination[1:]:
         t.append(d.contents[0].strip())
     examination_body.append(t)
 
-result = soup.find("div", {"id": "div37419"})
+# result = soup.find("div", {"id": "div40"})
+# result = result.find('div')
+result = soup.find("div", {"id": "divResult"})
+result = result.find('tbody')
 result = result.find('tbody')
 result = result.find_all('tr')
 
@@ -83,11 +86,11 @@ for element in result[1:]:
     result_body.append(t)
 
 content = {
-    'Attendance':
-        {
-            'heading': attendance_heading,
-            'body': attendance_body_content
-        },
+    # 'Attendance':
+    #     {
+    #         'heading': attendance_heading,
+    #         'body': attendance_body_content
+    #     },
     'Examination': {
         
             'heading': examination_heading,
@@ -100,3 +103,4 @@ content = {
             'body': result_body
         }
 }
+print(content)
