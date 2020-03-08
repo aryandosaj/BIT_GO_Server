@@ -22,9 +22,9 @@ Install these python libraries before running the server
 
 ## Usage
 
-Run webhook.py using the following commands:
+Run webhook.py using the following command:
 ```python
-python3 webhook.py
+python webhook.py
 ```
 
 ## Contributing
